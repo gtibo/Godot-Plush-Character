@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://cla33c2qqx78a"]
+
+[ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://components/player/player.tscn" id="1_gygqy"]
+[ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://components/grid_mat.tres" id="2_p8i8x"]
+
+[sub_resource type="Environment" id="Environment_0aoev"]
+background_mode = 1
+background_color = Color(0.15, 0.15, 0.15, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.359069, 0.359069, 0.359069, 1)
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.15, 0.15, 0.15, 1)
+fog_density = 1.0
+fog_depth_end = 30.0
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xuepk"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q3h73"]
+size = Vector2(100, 100)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0aoev")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.422618, 0.640856, -0.640856, 0, 0.707107, 0.707107, 0.906308, -0.298836, 0.298836, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 20.0
+
+[node name="Player" parent="." instance=ExtResource("1_gygqy")]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_xuepk")
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+material_override = ExtResource("2_p8i8x")
+mesh = SubResource("PlaneMesh_q3h73")
+skeleton = NodePath("../..")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("2_p8i8x")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -6)
+size = Vector3(8, 2, 8)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 1, -8)
+size = Vector3(3, 2, 4)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -6)
+polygon = PackedVector2Array(0, 0, 0, 2, 4, 0)
+depth = 3.0
