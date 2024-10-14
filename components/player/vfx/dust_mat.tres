@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://fkuklawrv3wp"]
 
-[ext_resource type="Shader" path="res://components/vfx/smoke/base_smoke.gdshader" id="1_vtmpj"]
+[ext_resource type="Shader" path="res://components/player/vfx/base_smoke.gdshader" id="1_vtmpj"]
 
 [sub_resource type="Gradient" id="Gradient_mve45"]
 colors = PackedColorArray(0.470076, 0.470076, 0.470076, 1, 1, 1, 1, 1)

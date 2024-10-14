@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://clufifu3bdsfu"]
 
-[ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://components/vfx/smoke/dust_mat.tres" id="1_11toi"]
+[ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://components/player/vfx/dust_mat.tres" id="1_11toi"]
 [ext_resource type="Script" path="res://components/player/vfx/self_destroy_particles.gd" id="2_ljaw4"]
 
 [sub_resource type="Curve" id="Curve_v2cdq"]

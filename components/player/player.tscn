@@ -1,12 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=19 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" path="res://components/player/player.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://components/godot_plush/godot_plush_skin.tscn" id="2_mtsks"]
 [ext_resource type="PackedScene" uid="uid://c0b71d2b1hdp6" path="res://components/orbit_control/orbit_view.tscn" id="3_hcr6r"]
-[ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://components/vfx/smoke/dust_mat.tres" id="4_j7qt1"]
+[ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://components/player/vfx/dust_mat.tres" id="4_j7qt1"]
 [ext_resource type="AudioStream" uid="uid://b7q12qmsksbc7" path="res://assets/sounds/footstep_concrete_000.ogg" id="5_8ixl8"]
 [ext_resource type="AudioStream" uid="uid://c6unhc5lontfn" path="res://assets/sounds/footstep_concrete_001.ogg" id="6_nlp36"]
 [ext_resource type="AudioStream" uid="uid://byg4lkp3ws8kt" path="res://assets/sounds/footstep_concrete_002.ogg" id="7_4283i"]
+[ext_resource type="AudioStream" uid="uid://bly24bd3apvev" path="res://assets/sounds/jingles_SAX15.ogg" id="8_s241m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhngq"]
 
@@ -51,6 +52,11 @@ stream_0/stream = ExtResource("5_8ixl8")
 stream_1/stream = ExtResource("6_nlp36")
 stream_2/stream = ExtResource("7_4283i")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fvg16"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("8_s241m")
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ms4x1")
 
@@ -85,3 +91,7 @@ unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_3vpnr")
 volume_db = 5.0
 max_polyphony = 3
+
+[node name="WaveAudio" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_fvg16")

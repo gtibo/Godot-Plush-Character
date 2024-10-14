@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var jump_height : float = 2.25
+@export var jump_height : float = 2.5
 @export var jump_time_to_peak : float = 0.4
 @export var jump_time_to_descent : float = 0.3
 
@@ -16,6 +16,7 @@ extends CharacterBody3D
 @onready var movement_dust = %MovementDust
 @onready var foot_step_audio = %FootStepAudio
 @onready var impact_audio = %ImpactAudio
+@onready var wave_audio = %WaveAudio
 
 const JUMP_PARTICLES_SCENE = preload("./vfx/jump_particles.tscn")
 const LAND_PARTICLES_SCENE = preload("./vfx/land_particles.tscn")
@@ -25,20 +26,27 @@ var target_angle : float = 0.0
 var last_movement_input : Vector2 = Vector2.ZERO
 
 func _ready():
+	godot_plush_skin.waved.connect(wave_audio.play)
 	move_and_slide()
 	godot_plush_skin.footstep.connect(func(intensity : float = 1.0):
 		foot_step_audio.volume_db = linear_to_db(intensity)
 		foot_step_audio.play()
 		)
 
+func _unhandled_input(event):
+	if (event.is_action_pressed("wave")
+		&& is_on_floor()
+		&& !godot_plush_skin.is_waving()):
+		godot_plush_skin.wave()
+
 func _physics_process(delta):
 	var camera : Camera3D = get_viewport().get_camera_3d()
 	if camera == null: return
 	movement_input = Input.get_vector("left", "right", "up", "down").rotated(-camera.global_rotation.y)
-	var is_running : bool = Input.is_action_pressed("run")
+	var is_running : bool = Input.is_action_pressed("run") && !godot_plush_skin.is_waving()
 	var vel_2d = Vector2(velocity.x, velocity.z)
 	
-	if movement_input != Vector2.ZERO:
+	if movement_input != Vector2.ZERO && !godot_plush_skin.is_waving():
 		godot_plush_skin.set_state("run" if is_running else "walk")
 		var speed = run_speed if is_running else base_speed
 		vel_2d += movement_input * speed * 8.0 * delta
@@ -59,7 +67,7 @@ func _physics_process(delta):
 	movement_dust.emitting = is_running && is_on_floor() && movement_input != Vector2.ZERO
 	
 	if is_on_floor():
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") && !godot_plush_skin.is_waving():
 			godot_plush_skin.set_state("jump")
 			velocity.y = -jump_velocity
 			
@@ -88,7 +96,7 @@ func _physics_process(delta):
 func _on_hit_floor(y_vel : float):
 	y_vel = clamp(abs(y_vel), 0.0, fall_gravity)
 	var floor_impact_percent : float = y_vel / fall_gravity
-	if floor_impact_percent < 0.2: return
+	impact_audio.volume_db = linear_to_db(remap(floor_impact_percent, 0.0, 1.0, 0.5, 2.0))
 	impact_audio.play()
 	var land_particles = LAND_PARTICLES_SCENE.instantiate()
 	add_sibling(land_particles)
