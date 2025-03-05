@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends RigidBody3D
 
 @export var jump_height : float = 2.5
 @export var jump_time_to_peak : float = 0.4
@@ -28,15 +28,16 @@ var last_movement_input : Vector2 = Vector2.ZERO
 
 var ragdoll : bool = false : set = _set_ragdoll
 
+var was_on_floor : bool = false
+
 func _set_ragdoll(value : bool) -> void:
 	ragdoll = value
 	collision_shape_3d.set_deferred("disabled", ragdoll)
 	godot_plush_skin.ragdoll = ragdoll
-	velocity = Vector3.ZERO
+	linear_velocity = Vector3.ZERO
 
 func _ready():
 	godot_plush_skin.waved.connect(wave_audio.play)
-	move_and_slide()
 	godot_plush_skin.footstep.connect(func(intensity : float = 1.0):
 		foot_step_audio.volume_db = linear_to_db(intensity)
 		foot_step_audio.play()
@@ -46,42 +47,43 @@ func _unhandled_input(event):
 	if event.is_action_pressed("attack"):
 		ragdoll = !ragdoll
 	if (event.is_action_pressed("wave")
-		&& is_on_floor()
 		&& !godot_plush_skin.is_waving()):
 		godot_plush_skin.wave()
 
-func _physics_process(delta):
+func _integrate_forces(state : PhysicsDirectBodyState3D):
 	if ragdoll: return
 	var camera : Camera3D = get_viewport().get_camera_3d()
 	if camera == null: return
 	movement_input = Input.get_vector("left", "right", "up", "down").rotated(-camera.global_rotation.y)
 	var is_running : bool = Input.is_action_pressed("run") && !godot_plush_skin.is_waving()
-	var vel_2d = Vector2(velocity.x, velocity.z)
+	var vel_2d = Vector2(state.linear_velocity.x, state.linear_velocity.z)
+	var is_moving : bool = movement_input != Vector2.ZERO
 	
-	if movement_input != Vector2.ZERO && !godot_plush_skin.is_waving():
+	physics_material_override.friction = 0.0 if is_moving else 0.8
+
+	if is_moving && !godot_plush_skin.is_waving():
 		godot_plush_skin.set_state("run" if is_running else "walk")
 		var speed = run_speed if is_running else base_speed
-		vel_2d += movement_input * speed * 8.0 * delta
+		vel_2d += movement_input * speed * 8.0 * state.step
 		vel_2d = vel_2d.limit_length(speed)
-		velocity.x = vel_2d.x
-		velocity.z = vel_2d.y
+		state.linear_velocity.x = vel_2d.x
+		state.linear_velocity.z = vel_2d.y
 		target_angle = -movement_input.orthogonal().angle()
 	else:
 		godot_plush_skin.set_state("idle")
-		vel_2d = vel_2d.move_toward(Vector2.ZERO, base_speed * 4.0 * delta)
-		velocity.x = vel_2d.x
-		velocity.z = vel_2d.y
-	
-	visual_root.rotation.y = rotate_toward(visual_root.rotation.y, target_angle, 6.0 * delta)
-	var angle_diff = angle_difference(visual_root.rotation.y, target_angle)
-	godot_plush_skin.tilt = move_toward(godot_plush_skin.tilt, angle_diff, 2.0 * delta)
 
-	movement_dust.emitting = is_running && is_on_floor() && movement_input != Vector2.ZERO
+	visual_root.rotation.y = rotate_toward(visual_root.rotation.y, target_angle, 6.0 * state.step)
+	var angle_diff = angle_difference(visual_root.rotation.y, target_angle)
+	godot_plush_skin.tilt = move_toward(godot_plush_skin.tilt, angle_diff, 2.0 * state.step)
 	
-	if is_on_floor():
+	var is_on_floor : bool = _is_on_floor(state)
+	
+	movement_dust.emitting = is_running && is_on_floor && movement_input != Vector2.ZERO
+	
+	if is_on_floor:
 		if Input.is_action_just_pressed("jump") && !godot_plush_skin.is_waving():
 			godot_plush_skin.set_state("jump")
-			velocity.y = -jump_velocity
+			state.linear_velocity.y = -jump_velocity
 			
 			var jump_particles = JUMP_PARTICLES_SCENE.instantiate()
 			add_sibling(jump_particles)
@@ -91,20 +93,22 @@ func _physics_process(delta):
 	else:
 		godot_plush_skin.set_state("fall")
 		
-	var gravity = jump_gravity if velocity.y > 0.0 else fall_gravity
-	if !is_on_floor():
-		velocity.y -= gravity * delta
+	var gravity = jump_gravity if state.linear_velocity.y > 0.0 else fall_gravity
+
+	state.linear_velocity.y -= gravity * state.step
 	
-	var in_the_air : bool = !is_on_floor()
+	state.linear_velocity = state.linear_velocity.limit_length(fall_gravity)
 	
-	var previous_y_vel : float = velocity.y
+	if !was_on_floor && is_on_floor:
+		_on_hit_floor(state.linear_velocity.y)
 	
+	was_on_floor = is_on_floor
 	
-	velocity = velocity.limit_length(fall_gravity)
-	move_and_slide()
-	
-	if is_on_floor() && in_the_air:
-		_on_hit_floor(previous_y_vel)
+func _is_on_floor(state : PhysicsDirectBodyState3D) -> bool:
+	for col_idx in state.get_contact_count():
+		var col_normal = state.get_contact_local_normal(col_idx)
+		return col_normal.dot(Vector3.UP) > -0.5
+	return false
 
 func _on_hit_floor(y_vel : float):
 	y_vel = clamp(abs(y_vel), 0.0, fall_gravity)

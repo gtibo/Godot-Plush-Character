@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=20 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://components/player/player.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://components/godot_plush/godot_plush_skin.tscn" id="2_mtsks"]
@@ -8,6 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://c6unhc5lontfn" path="res://assets/sounds/footstep_concrete_001.ogg" id="6_nlp36"]
 [ext_resource type="AudioStream" uid="uid://byg4lkp3ws8kt" path="res://assets/sounds/footstep_concrete_002.ogg" id="7_4283i"]
 [ext_resource type="AudioStream" uid="uid://bly24bd3apvev" path="res://assets/sounds/jingles_SAX15.ogg" id="8_s241m"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bv0o5"]
+friction = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhngq"]
 
@@ -57,7 +60,14 @@ random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("8_s241m")
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_bv0o5")
+custom_integrator = true
+contact_monitor = true
+max_contacts_reported = 8
 script = ExtResource("1_ms4x1")
 
 [node name="VisualRoot" type="Node3D" parent="."]

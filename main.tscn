@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cla33c2qqx78a"]
+[gd_scene load_steps=12 format=3 uid="uid://cla33c2qqx78a"]
 
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://components/player/player.tscn" id="1_gygqy"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://assets/materials/grid_mat.tres" id="2_p8i8x"]
@@ -12,6 +12,9 @@ ambient_light_color = Color(0.359069, 0.359069, 0.359069, 1)
 tonemap_mode = 2
 ssao_enabled = true
 glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 1.0
+glow_levels/4 = 1.0
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.15, 0.15, 0.15, 1)
@@ -22,6 +25,22 @@ fog_depth_end = 30.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_q3h73"]
 size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.2291, 0.79, 0.313235, 1)
+roughness = 0.6
+rim_enabled = true
+
+[sub_resource type="PrismMesh" id="PrismMesh_h2yge"]
+size = Vector3(1, 1, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
+size = Vector3(8, 0.2, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+size = Vector3(8, 0.2, 2.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
 
 [node name="Main" type="Node3D"]
 
@@ -96,25 +115,60 @@ polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
 depth = 6.0
 
 [node name="GodotPlushSkin" parent="." instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83593, 2.9491, -4.28301)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, -5)
 ragdoll = true
 
 [node name="GodotPlushSkin2" parent="." instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16407, 2.9491, -8.28301)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 6, -5)
 ragdoll = true
 
 [node name="GodotPlushSkin3" parent="." instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.61433, 8.36235, -8.04861)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8, -5)
 ragdoll = true
 
 [node name="GodotPlushSkin4" parent="." instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83593, 10.1667, -4.28301)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 10, -5)
 ragdoll = true
 
 [node name="GodotPlushSkin5" parent="." instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16407, 10.1667, -8.28301)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -5)
 ragdoll = true
 
 [node name="GodotPlushSkin6" parent="." instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.61433, 15.58, -8.04861)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 14, -5)
 ragdoll = true
+
+[node name="GodotPlushSkin7" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 16, -5)
+ragdoll = true
+
+[node name="GodotPlushSkin8" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 18, -5)
+ragdoll = true
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -16)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("PrismMesh_h2yge")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D"]
+shape = SubResource("BoxShape3D_h2yge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D"]
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Node3D"]
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
+shape = SubResource("SphereShape3D_h2yge")
