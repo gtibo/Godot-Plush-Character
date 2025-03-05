@@ -1,8 +1,8 @@
 [gd_scene load_steps=56 format=3 uid="uid://dmyrflud401tg"]
 
-[ext_resource type="Script" path="res://components/godot_plush/godot_plush_skin.gd" id="1_3jn4j"]
+[ext_resource type="Script" uid="uid://bywr5s55l57ru" path="res://components/godot_plush/godot_plush_skin.gd" id="1_3jn4j"]
 [ext_resource type="PackedScene" uid="uid://c1y2hy36wml6g" path="res://components/godot_plush/godot_plush_model.glb" id="1_u1eck"]
-[ext_resource type="Shader" path="res://components/godot_plush/material/godot_plush.gdshader" id="2_snxew"]
+[ext_resource type="Shader" uid="uid://dhkgcxxo8ja7b" path="res://components/godot_plush/material/godot_plush.gdshader" id="2_snxew"]
 [ext_resource type="Material" uid="uid://buh6uaww5rtsq" path="res://components/godot_plush/material/godot_plush_mat.tres" id="3_ky0v5"]
 [ext_resource type="Texture2D" uid="uid://drijhg0g7ak1n" path="res://components/godot_plush/material/godot_plush_albedo.png" id="3_qrsv6"]
 [ext_resource type="Texture2D" uid="uid://dts2qgujqag2b" path="res://components/godot_plush/material/godot_plush_normal.png" id="4_2bjgw"]
@@ -11,16 +11,16 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lmyc1"]
 render_priority = 0
 shader = ExtResource("2_snxew")
-shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/albedo_texture = ExtResource("3_qrsv6")
 shader_parameter/normal_texture = ExtResource("4_2bjgw")
+shader_parameter/uv_offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bb2f"]
 render_priority = 0
 shader = ExtResource("2_snxew")
-shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/albedo_texture = ExtResource("3_qrsv6")
 shader_parameter/normal_texture = ExtResource("4_2bjgw")
+shader_parameter/uv_offset = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_nabpl"]
 tracks/0/type = "position_3d"
@@ -1450,15 +1450,15 @@ tracks/21/keys = PackedFloat32Array(0, 1, -1.02261e-05, 0.932384, -0.36147, 0.00
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_spxrl"]
 _data = {
-"RESET": SubResource("Animation_nabpl"),
-"fall": SubResource("Animation_o2huf"),
-"idle": SubResource("Animation_1gt8u"),
-"run": SubResource("Animation_p8ptm"),
-"tilt_l": SubResource("Animation_gp2mw"),
-"tilt_r": SubResource("Animation_8opb7"),
-"up": SubResource("Animation_4hs7b"),
-"walk": SubResource("Animation_c0tsh"),
-"wave": SubResource("Animation_hwuym")
+&"RESET": SubResource("Animation_nabpl"),
+&"fall": SubResource("Animation_o2huf"),
+&"idle": SubResource("Animation_1gt8u"),
+&"run": SubResource("Animation_p8ptm"),
+&"tilt_l": SubResource("Animation_gp2mw"),
+&"tilt_r": SubResource("Animation_8opb7"),
+&"up": SubResource("Animation_4hs7b"),
+&"walk": SubResource("Animation_c0tsh"),
+&"wave": SubResource("Animation_hwuym")
 }
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_0ws1l"]
@@ -1660,8 +1660,8 @@ surface_material_override/2 = SubResource("ShaderMaterial_3bb2f")
 
 [node name="AnimationPlayer" parent="GodotPlushModel" index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_spxrl"),
-"custom_animations": ExtResource("7_b8qk8")
+&"": SubResource("AnimationLibrary_spxrl"),
+&"custom_animations": ExtResource("7_b8qk8")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

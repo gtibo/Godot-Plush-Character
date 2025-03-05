@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://bgkmxyw21pc1m"]
 
-[ext_resource type="Script" path="res://components/player/player.gd" id="1_ms4x1"]
+[ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://components/player/player.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://components/godot_plush/godot_plush_skin.tscn" id="2_mtsks"]
 [ext_resource type="PackedScene" uid="uid://c0b71d2b1hdp6" path="res://components/orbit_control/orbit_view.tscn" id="3_hcr6r"]
 [ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://components/player/vfx/dust_mat.tres" id="4_j7qt1"]

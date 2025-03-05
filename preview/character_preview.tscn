@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://by8jyd23n35mk"]
 
-[ext_resource type="Script" path="res://preview/character_preview.gd" id="1_bnjad"]
+[ext_resource type="Script" uid="uid://8cq8dayray14" path="res://preview/character_preview.gd" id="1_bnjad"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://components/godot_plush/godot_plush_skin.tscn" id="1_v46vo"]
-[ext_resource type="Shader" path="res://preview/ground_grid.gdshader" id="3_5g8wc"]
-[ext_resource type="Shader" path="res://preview/background_sky.gdshader" id="3_m00fu"]
+[ext_resource type="Shader" uid="uid://dgjaklycu8ue0" path="res://preview/ground_grid.gdshader" id="3_5g8wc"]
+[ext_resource type="Shader" uid="uid://d3bkx4rwed2b7" path="res://preview/background_sky.gdshader" id="3_m00fu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_85fby"]
 render_priority = 0

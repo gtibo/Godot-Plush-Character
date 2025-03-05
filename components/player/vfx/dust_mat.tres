@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://fkuklawrv3wp"]
 
-[ext_resource type="Shader" path="res://components/player/vfx/base_smoke.gdshader" id="1_vtmpj"]
+[ext_resource type="Shader" uid="uid://8q83aqwnx01q" path="res://components/player/vfx/base_smoke.gdshader" id="1_vtmpj"]
 
 [sub_resource type="Gradient" id="Gradient_mve45"]
 colors = PackedColorArray(0.470076, 0.470076, 0.470076, 1, 1, 1, 1, 1)
@@ -27,10 +27,10 @@ noise = SubResource("FastNoiseLite_oprkv")
 [resource]
 render_priority = 0
 shader = ExtResource("1_vtmpj")
+shader_parameter/noise_sampler = SubResource("NoiseTexture2D_vidi4")
+shader_parameter/gradient_sampler = SubResource("GradientTexture1D_7we1i")
+shader_parameter/height_fade = SubResource("CurveTexture_hyffm")
 shader_parameter/noise_scale = 0.2
 shader_parameter/edge = 0.1
 shader_parameter/smoothness = 0.5
 shader_parameter/energy = 1.0
-shader_parameter/noise_sampler = SubResource("NoiseTexture2D_vidi4")
-shader_parameter/gradient_sampler = SubResource("GradientTexture1D_7we1i")
-shader_parameter/height_fade = SubResource("CurveTexture_hyffm")

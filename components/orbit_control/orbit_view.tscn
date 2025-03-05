@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0b71d2b1hdp6"]
 
-[ext_resource type="Script" path="res://components/orbit_control/orbit_view.gd" id="1_hg1yw"]
+[ext_resource type="Script" uid="uid://c46lj0jmqn7io" path="res://components/orbit_control/orbit_view.gd" id="1_hg1yw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wgugf"]
 radius = 1.0
