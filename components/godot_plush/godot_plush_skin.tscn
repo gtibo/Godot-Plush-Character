@@ -1598,6 +1598,7 @@ fadein_time = 0.1
 fadeout_time = 0.2
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bin28"]
+graph_offset = Vector2(-746, -8)
 nodes/AddBlink/node = SubResource("AnimationNodeAdd2_0ws1l")
 nodes/AddBlink/position = Vector2(360, 140)
 nodes/AddTilt/node = SubResource("AnimationNodeAdd2_4akno")

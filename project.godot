@@ -11,9 +11,15 @@ config_version=5
 [application]
 
 config/name="Godot Plush"
-run/main_scene="res://main.tscn"
+run/main_scene="res://preview/character_preview.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [input]
 
@@ -88,5 +94,7 @@ wave={
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
 anti_aliasing/quality/msaa_3d=2

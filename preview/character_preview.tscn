@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://by8jyd23n35mk"]
+
+[ext_resource type="Script" path="res://preview/character_preview.gd" id="1_bnjad"]
+[ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://components/godot_plush/godot_plush_skin.tscn" id="1_v46vo"]
+[ext_resource type="Shader" path="res://preview/ground_grid.gdshader" id="3_5g8wc"]
+[ext_resource type="Shader" path="res://preview/background_sky.gdshader" id="3_m00fu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85fby"]
+render_priority = 0
+shader = ExtResource("3_5g8wc")
+shader_parameter/grid_color = Color(1, 1, 1, 1)
+shader_parameter/grid_opacity = 0.2
+shader_parameter/speed_factor = 0.0
+shader_parameter/grid_thickness = 0.015
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bkudn"]
+size = Vector2(4, 4)
+
+[sub_resource type="Environment" id="Environment_3poea"]
+ambient_light_source = 2
+ambient_light_color = Color(0.366595, 0.366595, 0.366595, 1)
+tonemap_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2rj3"]
+render_priority = 0
+shader = ExtResource("3_m00fu")
+
+[sub_resource type="SphereMesh" id="SphereMesh_v4gck"]
+
+[node name="CharacterPreview" type="Node3D"]
+script = ExtResource("1_bnjad")
+
+[node name="CharacterRoot" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 0, 0, 0)
+
+[node name="GodotPlushSkin" parent="CharacterRoot" instance=ExtResource("1_v46vo")]
+unique_name_in_owner = true
+
+[node name="Grid" type="MeshInstance3D" parent="CharacterRoot"]
+unique_name_in_owner = true
+material_override = SubResource("ShaderMaterial_85fby")
+mesh = SubResource("PlaneMesh_bkudn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3poea")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+current = true
+fov = 45.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Camera3D"]
+material_override = SubResource("ShaderMaterial_u2rj3")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_v4gck")
+skeleton = NodePath("../../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.5
+offset_top = -71.0
+offset_right = 30.5
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
