@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Godot Plush"
-run/main_scene="res://preview/character_preview.tscn"
+run/main_scene="uid://cla33c2qqx78a"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -91,6 +91,10 @@ wave={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 

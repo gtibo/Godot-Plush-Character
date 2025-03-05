@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cla33c2qqx78a"]
+[gd_scene load_steps=7 format=3 uid="uid://cla33c2qqx78a"]
 
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://components/player/player.tscn" id="1_gygqy"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://assets/materials/grid_mat.tres" id="2_p8i8x"]
+[ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://components/godot_plush/godot_plush_skin.tscn" id="3_h2yge"]
 
 [sub_resource type="Environment" id="Environment_0aoev"]
 background_mode = 1
@@ -93,3 +94,27 @@ depth = 6.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, -6)
 polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
 depth = 6.0
+
+[node name="GodotPlushSkin" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83593, 2.9491, -4.28301)
+ragdoll = true
+
+[node name="GodotPlushSkin2" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16407, 2.9491, -8.28301)
+ragdoll = true
+
+[node name="GodotPlushSkin3" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.61433, 8.36235, -8.04861)
+ragdoll = true
+
+[node name="GodotPlushSkin4" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83593, 10.1667, -4.28301)
+ragdoll = true
+
+[node name="GodotPlushSkin5" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16407, 10.1667, -8.28301)
+ragdoll = true
+
+[node name="GodotPlushSkin6" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.61433, 15.58, -8.04861)
+ragdoll = true

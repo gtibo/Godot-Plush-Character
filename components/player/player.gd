@@ -17,6 +17,7 @@ extends CharacterBody3D
 @onready var foot_step_audio = %FootStepAudio
 @onready var impact_audio = %ImpactAudio
 @onready var wave_audio = %WaveAudio
+@onready var collision_shape_3d = %CollisionShape3D
 
 const JUMP_PARTICLES_SCENE = preload("./vfx/jump_particles.tscn")
 const LAND_PARTICLES_SCENE = preload("./vfx/land_particles.tscn")
@@ -24,6 +25,14 @@ const LAND_PARTICLES_SCENE = preload("./vfx/land_particles.tscn")
 var movement_input : Vector2 = Vector2.ZERO
 var target_angle : float = 0.0
 var last_movement_input : Vector2 = Vector2.ZERO
+
+var ragdoll : bool = false : set = _set_ragdoll
+
+func _set_ragdoll(value : bool) -> void:
+	ragdoll = value
+	collision_shape_3d.set_deferred("disabled", ragdoll)
+	godot_plush_skin.ragdoll = ragdoll
+	velocity = Vector3.ZERO
 
 func _ready():
 	godot_plush_skin.waved.connect(wave_audio.play)
@@ -34,12 +43,15 @@ func _ready():
 		)
 
 func _unhandled_input(event):
+	if event.is_action_pressed("attack"):
+		ragdoll = !ragdoll
 	if (event.is_action_pressed("wave")
 		&& is_on_floor()
 		&& !godot_plush_skin.is_waving()):
 		godot_plush_skin.wave()
 
 func _physics_process(delta):
+	if ragdoll: return
 	var camera : Camera3D = get_viewport().get_camera_3d()
 	if camera == null: return
 	movement_input = Input.get_vector("left", "right", "up", "down").rotated(-camera.global_rotation.y)
@@ -80,7 +92,8 @@ func _physics_process(delta):
 		godot_plush_skin.set_state("fall")
 		
 	var gravity = jump_gravity if velocity.y > 0.0 else fall_gravity
-	velocity.y -= gravity * delta
+	if !is_on_floor():
+		velocity.y -= gravity * delta
 	
 	var in_the_air : bool = !is_on_floor()
 	
