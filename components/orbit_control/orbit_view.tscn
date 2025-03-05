@@ -6,7 +6,6 @@
 radius = 1.0
 
 [node name="OrbitView" type="SpringArm3D"]
-collision_mask = 0
 shape = SubResource("SphereShape3D_wgugf")
 spring_length = 8.0
 script = ExtResource("1_hg1yw")

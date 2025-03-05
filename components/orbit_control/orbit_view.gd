@@ -6,6 +6,7 @@ var active : bool = true : set = set_active
 @export_range(-90.0, 90.0, 0.1, "radians") var max_limit_x : float
 
 func _ready():
+	Input.set_use_accumulated_input(false)
 	set_active(active)
 
 func _unhandled_input(event):
@@ -22,7 +23,9 @@ func set_active(state : bool):
 func _input(event):
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
 	if event is InputEventMouseMotion: 
-		rotate_from_vector(event.relative * 0.005)
+		var viewport_transform: Transform2D = get_tree().root.get_final_transform()
+		var mouse_motion = event.xformed_by(viewport_transform).relative
+		rotate_from_vector(mouse_motion * 0.0025)
 
 func _process(delta):
 	var joy_dir = Input.get_vector("pan_left", "pan_right", "pan_up", "pan_down")
