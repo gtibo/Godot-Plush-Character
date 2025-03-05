@@ -24,6 +24,8 @@ tonemap_mode = 2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u2rj3"]
 render_priority = 0
 shader = ExtResource("3_m00fu")
+shader_parameter/top_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/bottom_color = Color(0.1, 0.1, 0.1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_v4gck"]
 
@@ -56,7 +58,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 current = true
 fov = 45.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Camera3D"]
+[node name="BackgroundMesh" type="MeshInstance3D" parent="Node3D/Camera3D"]
 material_override = SubResource("ShaderMaterial_u2rj3")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_v4gck")
