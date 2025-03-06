@@ -65,10 +65,13 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_bv0o5")
+can_sleep = false
+lock_rotation = true
 custom_integrator = true
 contact_monitor = true
 max_contacts_reported = 8
 script = ExtResource("1_ms4x1")
+jump_height = 3.0
 
 [node name="VisualRoot" type="Node3D" parent="."]
 unique_name_in_owner = true
