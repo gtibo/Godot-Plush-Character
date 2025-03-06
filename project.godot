@@ -14,7 +14,7 @@ config/name="Godot Plush"
 run/main_scene="uid://cla33c2qqx78a"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/show_image=false
-config/icon="res://icon.svg"
+config/icon="uid://bnaxiap5454wx"
 
 [display]
 
