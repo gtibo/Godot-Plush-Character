@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cla33c2qqx78a"]
+[gd_scene load_steps=15 format=3 uid="uid://cla33c2qqx78a"]
 
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://components/player/player.tscn" id="1_gygqy"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://assets/materials/grid_mat.tres" id="2_p8i8x"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://components/godot_plush/godot_plush_skin.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://b3umwph21qtwy" path="res://components/spawner.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cpnrk75buh8lt" path="res://components/ball/ball.tscn" id="5_lquwl"]
 
 [sub_resource type="Environment" id="Environment_0aoev"]
 background_mode = 1
@@ -41,6 +43,8 @@ size = Vector3(8, 0.2, 2.5)
 size = Vector3(8, 0.2, 2.5)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
 
 [node name="Main" type="Node3D"]
 
@@ -146,29 +150,62 @@ ragdoll = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 18, -5)
 ragdoll = true
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Balance" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -16)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Balance"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_h2yge")
 mesh = SubResource("PrismMesh_h2yge")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Node3D"]
+[node name="RigidBody3D" type="RigidBody3D" parent="Balance"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Balance/RigidBody3D"]
 shape = SubResource("BoxShape3D_h2yge")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Balance/RigidBody3D"]
 material_override = SubResource("StandardMaterial3D_h2yge")
 mesh = SubResource("BoxMesh_h2yge")
 
-[node name="HingeJoint3D" type="HingeJoint3D" parent="Node3D"]
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Balance"]
 node_a = NodePath("../RigidBody3D")
 node_b = NodePath("../StaticBody3D")
+angular_limit/enable = true
+angular_limit/upper = 0.174533
+angular_limit/lower = -0.174533
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Balance"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Balance/StaticBody3D"]
 shape = SubResource("SphereShape3D_h2yge")
+
+[node name="Ballpit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 5)
+
+[node name="Boundary" type="StaticBody3D" parent="Ballpit"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ballpit/Boundary"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ballpit/Boundary"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 5)
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Ballpit/Boundary"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Ballpit/Boundary"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -5)
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="Spawner" type="Marker3D" parent="Ballpit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+script = ExtResource("4_1bvp3")
+spawnable_objects = Array[PackedScene]([ExtResource("5_lquwl")])
+size = Vector3(4, 2, 4)
+max_spawnable = 600
