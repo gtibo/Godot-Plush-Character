@@ -9,7 +9,7 @@ extends Marker3D
 var spawned_objects : int = 0
 var time_stamp : int = 0
 
-func _process(delta):
+func _process(_delta):
 	var now = Time.get_ticks_msec()
 	var diff = (now - time_stamp)
 	if diff < 30: return
