@@ -20,3 +20,10 @@ A fun, energetic character for your Godot project
 ### Credits
 
 Demo Audio: [Kenney](https://kenney.nl/assets/category:Audio?sort=update)
+
+### Used In
+Projects using the Godot plush model.
+
+[Godot Multiplayer video](https://www.youtube.com/watch?v=jff9oxO8v1s) by [Andrew Davis](https://jonandrewdavis.com/)
+
+[Godot State Machine Third Person Controller](https://github.com/Jeh3no/Godot-State-Machine-Third-Person-Controller) by [Jeh3no](https://github.com/Jeh3no)
