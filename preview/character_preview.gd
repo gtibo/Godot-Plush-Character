@@ -31,3 +31,12 @@ func _ready():
 		if grid_speed.has(states[idx]): speed = grid_speed[states[idx]]
 		grid.material_override.set_shader_parameter("speed_factor", speed)
 		)
+	return
+	await get_tree().create_timer(2.0).timeout
+	option_button.item_selected.emit(1)
+	await get_tree().create_timer(2.0).timeout
+	option_button.item_selected.emit(2)
+	await get_tree().create_timer(2.0).timeout
+	option_button.item_selected.emit(3)
+	await get_tree().create_timer(2.0).timeout
+	get_tree().quit()

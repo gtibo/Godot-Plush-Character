@@ -35,7 +35,7 @@ func set_state(state_name : String) -> void:
 
 func wave() -> void:
 	waved.emit()
-	animation_tree.set("parameters/WaveOneShot/request", true)
+	animation_tree.set("parameters/WaveOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func is_waving() -> bool:
 	return animation_tree.get("parameters/WaveOneShot/active")

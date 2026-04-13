@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://by8jyd23n35mk"]
+[gd_scene format=3 uid="uid://by8jyd23n35mk"]
 
 [ext_resource type="Script" uid="uid://8cq8dayray14" path="res://preview/character_preview.gd" id="1_bnjad"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://components/godot_plush/godot_plush_skin.tscn" id="1_v46vo"]
@@ -29,44 +29,44 @@ shader_parameter/bottom_color = Color(0.1, 0.1, 0.1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_v4gck"]
 
-[node name="CharacterPreview" type="Node3D"]
+[node name="CharacterPreview" type="Node3D" unique_id=1204680456]
 script = ExtResource("1_bnjad")
 
-[node name="CharacterRoot" type="Node3D" parent="."]
+[node name="CharacterRoot" type="Node3D" parent="." unique_id=397010441]
 unique_name_in_owner = true
 transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 0, 0, 0)
 
-[node name="GodotPlushSkin" parent="CharacterRoot" instance=ExtResource("1_v46vo")]
+[node name="GodotPlushSkin" parent="CharacterRoot" unique_id=492215905 instance=ExtResource("1_v46vo")]
 unique_name_in_owner = true
 
-[node name="Grid" type="MeshInstance3D" parent="CharacterRoot"]
+[node name="Grid" type="MeshInstance3D" parent="CharacterRoot" unique_id=1590044861]
 unique_name_in_owner = true
 material_override = SubResource("ShaderMaterial_85fby")
 mesh = SubResource("PlaneMesh_bkudn")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1051940895]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1532060752]
 environment = SubResource("Environment_3poea")
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1, 0)
+[node name="Node3D" type="Node3D" parent="." unique_id=1933134447]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0.9, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Node3D"]
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=418767537]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 current = true
 fov = 45.0
 
-[node name="BackgroundMesh" type="MeshInstance3D" parent="Node3D/Camera3D"]
+[node name="BackgroundMesh" type="MeshInstance3D" parent="Node3D/Camera3D" unique_id=2081008259]
 material_override = SubResource("ShaderMaterial_u2rj3")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_v4gck")
 skeleton = NodePath("../../..")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1458308633]
 
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer"]
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer" unique_id=745956118]
 unique_name_in_owner = true
 anchors_preset = 7
 anchor_left = 0.5

@@ -13,11 +13,13 @@ func _process(_delta):
 	var now = Time.get_ticks_msec()
 	var diff = (now - time_stamp)
 	if diff < 30: return
-	
-	_spawn()
+
+	for i in range(50):
+		_spawn()
 	time_stamp = Time.get_ticks_msec()
 
-	if spawned_objects >= max_spawnable: set_process(false)
+	if spawned_objects >= max_spawnable: 
+		set_process(false)
 
 func _spawn():
 	var spawn_node = spawnable_objects.pick_random()

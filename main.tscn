@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cla33c2qqx78a"]
+[gd_scene format=3 uid="uid://cla33c2qqx78a"]
 
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://components/player/player.tscn" id="1_gygqy"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://assets/materials/grid_mat.tres" id="2_p8i8x"]
@@ -46,164 +46,164 @@ size = Vector3(8, 0.2, 2.5)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1855936305]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2074795015]
 environment = SubResource("Environment_0aoev")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1520074535]
 transform = Transform3D(0.422618, 0.640856, -0.640856, 0, 0.707107, 0.707107, 0.906308, -0.298836, 0.298836, 0, 0, 0)
 shadow_enabled = true
 directional_shadow_max_distance = 20.0
 
-[node name="Player" parent="." instance=ExtResource("1_gygqy")]
+[node name="Player" parent="." unique_id=650716148 instance=ExtResource("1_gygqy")]
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1530167137]
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=24866746]
 shape = SubResource("WorldBoundaryShape3D_xuepk")
 
-[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground" unique_id=1786233797]
 material_override = ExtResource("2_p8i8x")
 mesh = SubResource("PlaneMesh_q3h73")
 skeleton = NodePath("../..")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1723262861]
 material_override = ExtResource("2_p8i8x")
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2081333872]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -7)
 size = Vector3(8, 2, 10)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=932215475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -9)
 size = Vector3(4, 2, 6)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1233870486]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -9)
 size = Vector3(6, 2, 6)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=663606273]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, -12)
 size = Vector3(6, 4, 12)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1351064980]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 3, -21)
 size = Vector3(6, 6, 6)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1479955065]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, -18)
 size = Vector3(14, 6, 12)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=1976907190]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -6)
 polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
 depth = 4.0
 
-[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="CSGCombiner3D"]
+[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=1578148363]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -6, 0, -6)
 polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
 depth = 4.0
 
-[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="CSGCombiner3D"]
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=2048042760]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18, 4, -18)
 polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
 depth = 6.0
 
-[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="CSGCombiner3D"]
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=1316626537]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, -6)
 polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
 depth = 6.0
 
-[node name="GodotPlushSkin" parent="." instance=ExtResource("3_h2yge")]
+[node name="GodotPlushSkin" parent="." unique_id=1045660881 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, -5)
 ragdoll = true
 
-[node name="GodotPlushSkin2" parent="." instance=ExtResource("3_h2yge")]
+[node name="GodotPlushSkin2" parent="." unique_id=824089045 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 6, -5)
 ragdoll = true
 
-[node name="GodotPlushSkin3" parent="." instance=ExtResource("3_h2yge")]
+[node name="GodotPlushSkin3" parent="." unique_id=1704631146 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8, -5)
 ragdoll = true
 
-[node name="GodotPlushSkin4" parent="." instance=ExtResource("3_h2yge")]
+[node name="GodotPlushSkin4" parent="." unique_id=188835607 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 10, -5)
 ragdoll = true
 
-[node name="GodotPlushSkin5" parent="." instance=ExtResource("3_h2yge")]
+[node name="GodotPlushSkin5" parent="." unique_id=214385654 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -5)
 ragdoll = true
 
-[node name="GodotPlushSkin6" parent="." instance=ExtResource("3_h2yge")]
+[node name="GodotPlushSkin6" parent="." unique_id=1935221106 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 14, -5)
 ragdoll = true
 
-[node name="GodotPlushSkin7" parent="." instance=ExtResource("3_h2yge")]
+[node name="GodotPlushSkin7" parent="." unique_id=616157128 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 16, -5)
 ragdoll = true
 
-[node name="GodotPlushSkin8" parent="." instance=ExtResource("3_h2yge")]
+[node name="GodotPlushSkin8" parent="." unique_id=1438962088 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 18, -5)
 ragdoll = true
 
-[node name="Balance" type="Node3D" parent="."]
+[node name="Balance" type="Node3D" parent="." unique_id=540849878]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -16)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Balance"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Balance" unique_id=8330771]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_h2yge")
 mesh = SubResource("PrismMesh_h2yge")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Balance"]
+[node name="RigidBody3D" type="RigidBody3D" parent="Balance" unique_id=896820582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Balance/RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Balance/RigidBody3D" unique_id=721228328]
 shape = SubResource("BoxShape3D_h2yge")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Balance/RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Balance/RigidBody3D" unique_id=596057539]
 material_override = SubResource("StandardMaterial3D_h2yge")
 mesh = SubResource("BoxMesh_h2yge")
 
-[node name="HingeJoint3D" type="HingeJoint3D" parent="Balance"]
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Balance" unique_id=975288060]
 node_a = NodePath("../RigidBody3D")
 node_b = NodePath("../StaticBody3D")
 angular_limit/enable = true
 angular_limit/upper = 0.174533
 angular_limit/lower = -0.174533
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Balance"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Balance" unique_id=1711349695]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Balance/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Balance/StaticBody3D" unique_id=1777209001]
 shape = SubResource("SphereShape3D_h2yge")
 
-[node name="Ballpit" type="Node3D" parent="."]
+[node name="Ballpit" type="Node3D" parent="." unique_id=1362204707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 5)
 
-[node name="Boundary" type="StaticBody3D" parent="Ballpit"]
+[node name="Boundary" type="StaticBody3D" parent="Ballpit" unique_id=806591575]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ballpit/Boundary"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ballpit/Boundary" unique_id=1637763770]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_h2yge")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ballpit/Boundary"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ballpit/Boundary" unique_id=1933625533]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 5)
 shape = SubResource("WorldBoundaryShape3D_h2yge")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Ballpit/Boundary"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Ballpit/Boundary" unique_id=438261346]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_h2yge")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Ballpit/Boundary"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Ballpit/Boundary" unique_id=1939280141]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -5)
 shape = SubResource("WorldBoundaryShape3D_h2yge")
 
-[node name="Spawner" type="Marker3D" parent="Ballpit"]
+[node name="Spawner" type="Marker3D" parent="Ballpit" unique_id=554211712]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 script = ExtResource("4_1bvp3")
 spawnable_objects = Array[PackedScene]([ExtResource("5_lquwl")])
