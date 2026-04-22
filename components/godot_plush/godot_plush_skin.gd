@@ -8,12 +8,21 @@ extends Node3D
 @export var ragdoll : bool = false : set = _set_ragdoll
 var tilt : float = 0.0 : set = _set_tilt
 var squash_and_stretch = 1.0 : set = _set_squash_and_stretch
+var bones: Array[PhysicalBone3D] = []
+var linear_velocity : Vector3 = Vector3.ZERO
 
 signal footstep(intensity : float)
 signal waved
 
 func _ready():
+	_find_bones()
 	_set_ragdoll(ragdoll)
+
+func _find_bones() -> void:
+	for child in physical_bone_simulator_3d.get_children():
+		var bone := child as PhysicalBone3D
+		if bone:
+			bones.push_back(bone)
 
 func _set_ragdoll(value : bool) -> void:
 	ragdoll = value
@@ -22,6 +31,9 @@ func _set_ragdoll(value : bool) -> void:
 	animation_tree.active = !ragdoll
 	if ragdoll:
 		physical_bone_simulator_3d.physical_bones_start_simulation()
+		if linear_velocity != Vector3.ZERO:
+			for bone in bones:
+				bone.linear_velocity = linear_velocity + Vector3(randf(), randf(), randf()) * 2.0 - Vector3.ONE
 	else:
 		physical_bone_simulator_3d.physical_bones_stop_simulation()
 
@@ -47,3 +59,6 @@ func _set_squash_and_stretch(value : float) -> void:
 
 func emit_footstep(intensity : float = 1.0) -> void:
 	footstep.emit(intensity)
+
+func get_ragdoll_global_position() -> Vector3:
+	return bones[0].global_position if ragdoll else global_position
