@@ -37,6 +37,7 @@ var _was_on_floor : bool = false
 func _set_ragdoll(value : bool) -> void:
 	ragdoll = value
 	collision_shape_3d.set_deferred("disabled", ragdoll)
+	godot_plush_skin.linear_velocity = linear_velocity
 	godot_plush_skin.ragdoll = ragdoll
 	linear_velocity = Vector3.ZERO
 
@@ -57,7 +58,9 @@ func _unhandled_input(event):
 		godot_plush_skin.wave()
 
 func _integrate_forces(state : PhysicsDirectBodyState3D):
-	if ragdoll: return
+	if ragdoll:
+		global_position = global_position.lerp(godot_plush_skin.get_ragdoll_global_position(), 0.1)
+		return
 	var camera : Camera3D = get_viewport().get_camera_3d()
 	if camera == null: return
 	var is_waving : bool = godot_plush_skin.is_waving()
